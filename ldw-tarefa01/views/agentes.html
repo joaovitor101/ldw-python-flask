@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Agentes{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">Agentes</h1>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <form method="POST" class="row g-3 align-items-end">
+                <div class="col-md-8">
+                    <label for="agente" class="form-label">Nome do agente</label>
+                    <input id="agente" name="agente" class="form-control" required placeholder="Ex: Raze">
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-success w-100" type="submit">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Lista</div>
+        <div class="card-body">
+            <ol class="list-group list-group-numbered">
+                {% for agente in agentes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ agente }}
+                    <span class="badge bg-primary">{{ loop.index }}</span>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
