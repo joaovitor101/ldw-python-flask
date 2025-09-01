@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Mapas - Valorant Manager{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Gerenciar Mapas
+                </h5>
+                <hr>
+                
+                <!-- Formulário para adicionar mapa -->
+                <form method="POST" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name" class="form-label">
+                                    Nome do Mapa:
+                                </label>
+                                <input type="text" class="form-control" id="name" name="name" 
+                                       placeholder="Ex: Ascent" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="type" class="form-label">
+                                    Tipo:
+                                </label>
+                                <select class="form-control" id="type" name="type" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="Bomb">Bomb</option>
+                                    <option value="Spike Rush">Spike Rush</option>
+                                    <option value="Deathmatch">Deathmatch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="region" class="form-label">
+                                    Região:
+                                </label>
+                                <input type="text" class="form-control" id="region" name="region" 
+                                       placeholder="Ex: Itália" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="release" class="form-label">
+                                    Ano de Lançamento:
+                                </label>
+                                <input type="number" class="form-control" id="release" name="release" 
+                                       placeholder="Ex: 2020" min="2020" max="2025" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">
+                                Adicionar Mapa
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Tabela de mapas -->
+                <h6 class="mb-3">
+                    Tabela de Mapas ({{ maps|length }}):
+                </h6>
+                
+                {% if maps|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Região</th>
+                                <th>Lançamento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for map in maps %}
+                            <tr>
+                                <td><strong>{{ map.Nome }}</strong></td>
+                                <td>{{ map.Tipo }}</td>
+                                <td>{{ map.Região }}</td>
+                                <td>{{ map.Lancamento }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-warning" role="alert">
+                    Nenhum mapa cadastrado ainda. Adicione o primeiro mapa usando o formulário acima!
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

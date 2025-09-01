@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Agentes - Valorant Manager{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Informações do Jogo -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Informações do Jogo
+                </h5>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Título:</strong> {{ title }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Ano:</strong> {{ year }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Categoria:</strong> {{ category }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Detalhes do Jogo
+                </h5>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Nome:</strong> {{ game_info.Nome }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Desenvolvedor:</strong> {{ game_info.Desenvolvedor }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Ano:</strong> {{ game_info.Ano }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulário e Lista de Agentes -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Gerenciar Agentes
+                </h5>
+                <hr>
+                
+                <!-- Formulário para adicionar agente -->
+                <form method="POST" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="agent" class="form-label">
+                                    Nome do Agente:
+                                </label>
+                                <input type="text" class="form-control" id="agent" name="agent" 
+                                       placeholder="Digite o nome do agente" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Lista de agentes -->
+                <h6 class="mb-3">
+                    Lista de Agentes ({{ agents|length }}):
+                </h6>
+                <div class="list-group">
+                    {% for agent in agents %}
+                    <div class="list-group-item d-flex align-items-center">
+                        <div class="agent-indicator"></div>
+                        <span class="fw-bold">{{ agent }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                {% if agents|length == 0 %}
+                <div class="alert alert-warning" role="alert">
+                    Nenhum agente cadastrado ainda. Adicione o primeiro agente usando o formulário acima!
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
