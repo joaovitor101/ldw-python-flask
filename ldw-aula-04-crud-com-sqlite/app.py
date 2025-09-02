@@ -15,6 +15,7 @@ with app.app_context():
     db.create_all()
     
 if __name__ == '__main__':
+    db.init_app(app = app)
     #verificar no início da aplicação se o banco de dados existe, senão criar
     with app.test_request_context():
         db.create_all()
