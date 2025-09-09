@@ -1,133 +1,24 @@
-{% extends 'base.html' %} 
-
-{% block title %}{{ gameInfo.title }} - Detalhes do Jogo{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
-<div class="container mt-4">
-    <!-- Botão Voltar -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <a href="{{ url_for('apigames') }}" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left"></i> Voltar para Todos os Jogos
-            </a>
-        </div>
-    </div>
 
-    <!-- Card Principal do Jogo -->
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card shadow-lg border-0">
-                <div class="card-header bg-gradient-primary text-white py-3">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-gamepad me-3 fs-2"></i>
-                        <h2 class="mb-0">{{ gameInfo.title }}</h2>
-                    </div>
-                </div>
-                
-                <div class="card-body p-4">
-                    <div class="row">
-                        <!-- Imagem do Jogo -->
-                        <div class="col-md-5 mb-4">
-                            <div class="position-relative">
-                                <img src="{{ gameInfo.thumbnail }}" 
-                                     alt="{{ gameInfo.title }}" 
-                                     class="img-fluid rounded shadow-sm"
-                                     style="width: 100%; height: 300px; object-fit: cover;">
-                                <div class="position-absolute top-0 end-0 m-2">
-                                    <span class="badge bg-success fs-6">{{ gameInfo.platform }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Informações do Jogo -->
-                        <div class="col-md-7">
-                            <!-- Gênero -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-muted">Gênero</label>
-                                <div>
-                                    <span class="badge bg-primary fs-6 px-3 py-2">{{ gameInfo.genre }}</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Editora -->
-                            {% if gameInfo.publisher %}
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-muted">Editora</label>
-                                <p class="mb-0 fs-5">{{ gameInfo.publisher }}</p>
-                            </div>
-                            {% endif %}
-                            
-                            <!-- Data de Lançamento -->
-                            {% if gameInfo.release_date %}
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-muted">Data de Lançamento</label>
-                                <p class="mb-0 fs-5">
-                                    <i class="fas fa-calendar-alt text-primary me-2"></i>
-                                    {{ gameInfo.release_date }}
-                                </p>
-                            </div>
-                            {% endif %}
-                            
-                            <!-- Botão Jogar -->
-                            <div class="mt-4">
-                                <a href="{{ gameInfo.freetogame_profile_url }}" 
-                                   target="_blank" 
-                                   class="btn btn-danger btn-lg w-100">
-                                    <i class="fas fa-play me-2"></i>
-                                    Jogar Agora!
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Descrição -->
-                    {% if gameInfo.short_description %}
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <div class="card bg-light border-0">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary mb-3">
-                                        <i class="fas fa-info-circle me-2"></i>
-                                        Sobre o Jogo
-                                    </h5>
-                                    <p class="card-text fs-6 lh-base">{{ gameInfo.short_description }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px;">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <a href="{{url_for('apigames')}}" class="btn btn-dark">Voltar para todos os jogos</a>
+            <div class="card">
+                <img src="{{gameInfo.thumbnail}}" alt="Imagem do jogo">
+                <div class="card-body m-auto">
+                    <h3>{{gameInfo.title}}</h3>
+                    <p>Gênero: {{gameInfo.genre}}</p>
+                    <p>Descrição: {{gameInfo.short_description}}</p>
+                    <p>Plataforma: {{gameInfo.platform}}</p>
+                    <p>Editora: {{gameInfo.publisher}}</p>
+                    <p>Data de lançamento: {{gameInfo.release_date}}</p>
+                    <a href="{{gameInfo.freetogame_profile_url}}" class="btn btn-danger">Jogar agora!</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-.bg-gradient-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.card {
-    transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.btn-outline-secondary:hover {
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-.badge {
-    font-weight: 500;
-}
-
-.form-label {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-</style>
-{% endblock %}
+{% endblock content %}
