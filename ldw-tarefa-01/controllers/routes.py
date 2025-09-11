@@ -39,3 +39,5 @@ def init_app(app):
                 })
             
         return render_template('maps.html', maps=maps) 
+
+    

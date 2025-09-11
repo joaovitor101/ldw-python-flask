@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="background-color: #f0f0f0; border-radius: 8px;">
+    <div class="row">
+        {% for game in gamesList %}
+        <div class="col-md-3 m-auto">
+            <div class="card" style="width: 16rem;">
+                <img src="{{game.displayIcon}}" alt="Imagem do agente">
+                <div class="card-body">
+                    <h5>{{game.displayName}}</h5>
+                    <p>{{game.role.displayName if game.role}}{% if game.role %} - {{game.role.description}}{% endif %}</p>
+                    <a href="{{url_for('apigames', id=game.uuid)}}" class="btn btn-dark">+ Info</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

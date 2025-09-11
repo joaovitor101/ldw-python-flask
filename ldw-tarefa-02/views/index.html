@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Valorant Manager{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <h1 class="display-4 mb-4">
+                    Valorant Manager
+                </h1>
+                <p class="lead mb-4">Bem-vindo ao sistema de gerenciamento do Valorant!</p>
+                <hr class="my-4">
+                <p class="mb-4">Gerencie seus agentes favoritos, adicione novos mapas e mantenha um controle completo do sistema.</p>
+                
+                <div class="row mt-5">
+                    <div class="col-md-6 mb-3">
+                        <a href="/agents" class="btn btn-primary btn-lg w-100">
+                            Ver Agentes
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a href="/maps" class="btn btn-success btn-lg w-100">
+                            Gerenciar Mapas
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="alert alert-info text-center" role="alert">
+                            O jogo <strong>Valorant</strong> tem <strong>{{ 2025 - 2020 }}</strong> anos de lançamento
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
