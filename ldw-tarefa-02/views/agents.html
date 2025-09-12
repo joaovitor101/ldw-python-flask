@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Agentes - Valorant Manager{% endblock %}
+{% block title %}Agentes - CMS Valorant{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -9,27 +9,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
-                    Informações do Jogo
-                </h5>
-                <hr>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <strong>Título:</strong> {{ title }}
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Ano:</strong> {{ year }}
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Categoria:</strong> {{ category }}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="card mt-3">
-            <div class="card-body">
-                <h5 class="card-title">
-                    Detalhes do Jogo
+                    <i class="fas fa-gamepad me-2"></i>Informações do Jogo
                 </h5>
                 <hr>
                 <ul class="list-group list-group-flush">
@@ -42,6 +22,9 @@
                     <li class="list-group-item">
                         <strong>Ano:</strong> {{ game_info.Ano }}
                     </li>
+                    <li class="list-group-item">
+                        <strong>Categoria:</strong> {{ category }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -52,7 +35,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
-                    Gerenciar Agentes
+                    <i class="fas fa-users me-2"></i>Gerenciar Agentes
                 </h5>
                 <hr>
                 

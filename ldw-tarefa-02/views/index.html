@@ -1,36 +1,115 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Valorant Manager{% endblock %}
+{% block title %}Home - CMS Valorant{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
-        <div class="card shadow">
-            <div class="card-body p-5">
-                <h1 class="display-4 mb-4">
-                    Valorant Manager
-                </h1>
-                <p class="lead mb-4">Bem-vindo ao sistema de gerenciamento do Valorant!</p>
-                <hr class="my-4">
-                <p class="mb-4">Gerencie seus agentes favoritos, adicione novos mapas e mantenha um controle completo do sistema.</p>
-                
-                <div class="row mt-5">
-                    <div class="col-md-6 mb-3">
-                        <a href="/agents" class="btn btn-primary btn-lg w-100">
-                            Ver Agentes
-                        </a>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <a href="/maps" class="btn btn-success btn-lg w-100">
-                            Gerenciar Mapas
+    <div class="col-lg-10">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3">
+                <i class="fas fa-gamepad me-3"></i>CMS Valorant
+            </h1>
+            <p class="lead text-muted mb-4">Sistema completo de gerenciamento de conteúdo do Valorant</p>
+        </div>
+
+        <!-- Cards de funcionalidades -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-users fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Agentes</h5>
+                        <p class="card-text text-muted">Gerencie seus agentes favoritos do Valorant</p>
+                        <a href="/agents" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-1"></i>Acessar
                         </a>
                     </div>
                 </div>
-                
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="alert alert-info text-center" role="alert">
-                            O jogo <strong>Valorant</strong> tem <strong>{{ 2025 - 2020 }}</strong> anos de lançamento
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-map fa-3x text-success"></i>
+                        </div>
+                        <h5 class="card-title">Mapas</h5>
+                        <p class="card-text text-muted">Adicione e gerencie mapas do jogo</p>
+                        <a href="/maps" class="btn btn-success">
+                            <i class="fas fa-arrow-right me-1"></i>Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-globe fa-3x text-info"></i>
+                        </div>
+                        <h5 class="card-title">API Games</h5>
+                        <p class="card-text text-muted">Explore dados da API do Valorant</p>
+                        <a href="{{ url_for('apigames') }}" class="btn btn-info">
+                            <i class="fas fa-arrow-right me-1"></i>Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-warehouse fa-3x text-warning"></i>
+                        </div>
+                        <h5 class="card-title">Estoque</h5>
+                        <p class="card-text text-muted">Controle seu inventário de jogos</p>
+                        <a href="{{ url_for('estoque') }}" class="btn btn-warning">
+                            <i class="fas fa-arrow-right me-1"></i>Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações do sistema -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-info-circle me-2"></i>Sobre o Sistema
+                        </h5>
+                        <p class="card-text text-muted mb-3">
+                            O <strong>CMS Valorant</strong> é uma aplicação completa para gerenciamento de conteúdo do Valorant, 
+                            oferecendo controle total sobre agentes, mapas e inventário.
+                        </p>
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-gamepad fa-2x text-primary mb-2"></i>
+                                    <h6>Valorant</h6>
+                                    <small class="text-muted">{{ 2025 - 2020 }} anos de história</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-code fa-2x text-success mb-2"></i>
+                                    <h6>Desenvolvido com Flask</h6>
+                                    <small class="text-muted">Framework Python moderno</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-database fa-2x text-info mb-2"></i>
+                                    <h6>SQLite Database</h6>
+                                    <small class="text-muted">Armazenamento confiável</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

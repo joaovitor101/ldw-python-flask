@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for
 import urllib
 import json
+from datetime import datetime
 from models.database import Game,db
 
 def init_app(app):
@@ -26,6 +27,8 @@ def init_app(app):
         if request.method == 'POST':
             if request.form.get('agent'):
                 agents.append(request.form.get('agent'))
+                # Redirecionar após POST para evitar duplicação ao recarregar
+                return redirect(url_for('agents_page'))
                 
         return render_template('agents.html', title=title, year=year, category=category, agents=agents, game_info=game_info)
     
@@ -40,6 +43,8 @@ def init_app(app):
                     'Região': request.form.get('region'), 
                     'Lancamento': request.form.get('release')
                 })
+                # Redirecionar após POST para evitar duplicação ao recarregar
+                return redirect(url_for('maps_page'))
             
         return render_template('maps.html', maps=maps) 
 
@@ -59,30 +64,43 @@ def init_app(app):
     @app.route('/apigames', methods=['GET', 'POST'])
     @app.route('/apigames/<id>', methods=['GET', 'POST'])
     def apigames(id=None):  # Lista agentes de Valorant e detalhe por UUID
-        if id:
-            # Detalhe do agente por UUID
-            url = f'https://valorant-api.com/v1/agents/{id}'
-            response = urllib.request.urlopen(url)
-            data = response.read()
-            payload = json.loads(data)
-            if payload.get('status') == 200 and payload.get('data'):
-                gameInfo = payload['data']
-                return render_template('gameinfo.html', gameInfo=gameInfo)
-            return f'Agente com UUID {id} não encontrado.'
-        else:
-            # Lista de agentes jogáveis
-            url = 'https://valorant-api.com/v1/agents?isPlayableCharacter=true'
-            response = urllib.request.urlopen(url)
-            data = response.read()
-            payload = json.loads(data)
-            gamesList = payload.get('data', [])
-            return render_template('apigames.html', gamesList=gamesList)
+        try:
+            if id:
+                # Detalhe do agente por UUID
+                url = f'https://valorant-api.com/v1/agents/{id}'
+                response = urllib.request.urlopen(url)
+                data = response.read()
+                payload = json.loads(data)
+                if payload.get('status') == 200 and payload.get('data'):
+                    gameInfo = payload['data']
+                    return render_template('gameinfo.html', gameInfo=gameInfo)
+                return f'Agente com UUID {id} não encontrado.'
+            else:
+                # Lista de agentes jogáveis
+                url = 'https://valorant-api.com/v1/agents?isPlayableCharacter=true'
+                response = urllib.request.urlopen(url)
+                data = response.read()
+                payload = json.loads(data)
+                gamesList = payload.get('data', [])
+                return render_template('apigames.html', gamesList=gamesList)
+        except urllib.error.URLError as e:
+            # Tratamento de erro de conexão
+            error_message = f"Erro de conexão com a API: {str(e)}"
+            return render_template('apigames.html', gamesList=[], error=error_message)
+        except json.JSONDecodeError as e:
+            # Tratamento de erro de JSON
+            error_message = f"Erro ao processar resposta da API: {str(e)}"
+            return render_template('apigames.html', gamesList=[], error=error_message)
+        except Exception as e:
+            # Tratamento de outros erros
+            error_message = f"Erro inesperado: {str(e)}"
+            return render_template('apigames.html', gamesList=[], error=error_message)
 
     @app.route('/estoque', methods=['GET', 'POST'])
     def estoque():
         if request.method == 'POST':
             newGame = Game(request.form['collection'], request.form['name'], request.form['category'],
-                           request.form['vps'], request.form['variant'], request.form['data'])
+                           request.form['vps'], request.form['variant'], request.form['date'])
             db.session.add(newGame)
             db.session.commit()
             return redirect(url_for('estoque'))
@@ -93,12 +111,26 @@ def init_app(app):
     def edit(id):
         game = Game.query.get(id)
         if request.method == 'POST':
-            game.title = request.form['title']
-            game.year = request.form['year']
+            game.collection = request.form['collection']
+            game.name = request.form['name']
             game.category = request.form['category']
-            game.platform = request.form['platform']
-            game.price = request.form['price']
-            game.quantity = request.form['quantity']
+            game.vps = request.form['vps']
+            game.variant = request.form['variant']
+            # Converter string para date
+            date_str = request.form['date']
+            try:
+                # Tentar formato brasileiro primeiro (dd/mm/aaaa)
+                if '/' in date_str:
+                    game.date = datetime.strptime(date_str, '%d/%m/%Y').date()
+                # Tentar formato ISO (aaaa-mm-dd)
+                elif '-' in date_str:
+                    game.date = datetime.strptime(date_str, '%Y-%m-%d').date()
+                else:
+                    raise ValueError(f"Formato de data não reconhecido: {date_str}")
+            except ValueError as e:
+                print(f"Erro ao converter data '{date_str}': {e}")
+                # Manter a data atual se houver erro
+                pass
             db.session.commit()
             return redirect(url_for('estoque'))
         return render_template('editgame.html', game=game)

@@ -1,140 +1,405 @@
+/* Paleta de cores suaves e modernas */
 :root {
-    --valorant-red: #ff4655;
-    --valorant-dark: #0f1419;
-    --valorant-light: #ece8e1;
-    --valorant-gold: #ffd700;
-    --valorant-blue: #0f1419;
+    --primary-color: #6366f1;        /* Indigo suave */
+    --primary-light: #818cf8;        /* Indigo mais claro */
+    --primary-dark: #4f46e5;         /* Indigo mais escuro */
+    --secondary-color: #f1f5f9;      /* Cinza muito claro */
+    --accent-color: #06b6d4;         /* Ciano suave */
+    --accent-light: #67e8f9;         /* Ciano claro */
+    --success-color: #10b981;        /* Verde suave */
+    --warning-color: #f59e0b;        /* Amarelo suave */
+    --danger-color: #ef4444;         /* Vermelho suave */
+    --text-primary: #1e293b;         /* Cinza escuro */
+    --text-secondary: #64748b;       /* Cinza médio */
+    --text-light: #94a3b8;           /* Cinza claro */
+    --bg-primary: #ffffff;           /* Branco */
+    --bg-secondary: #f8fafc;         /* Cinza muito claro */
+    --bg-card: #ffffff;              /* Branco para cards */
+    --border-color: #e2e8f0;         /* Cinza claro para bordas */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Reset e configurações globais */
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, var(--valorant-dark) 0%, #1a1a1a 100%);
-    color: var(--valorant-light);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, #e0f2fe 100%);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
+/* Navbar moderno e limpo */
 .navbar {
-    background: linear-gradient(90deg, var(--valorant-red) 0%, #ff6b6b 100%) !important;
-    box-shadow: 0 2px 10px rgba(255, 70, 85, 0.3);
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 0;
 }
 
 .navbar-brand {
-    color: white !important;
-    font-weight: bold;
+    color: var(--text-primary) !important;
+    font-weight: 700;
     font-size: 1.5rem;
+    text-decoration: none;
 }
 
 .nav-link {
-    color: white !important;
+    color: var(--text-secondary) !important;
     font-weight: 500;
-    transition: color 0.2s ease;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-    color: var(--valorant-gold) !important;
+    color: var(--primary-color) !important;
+    background-color: var(--bg-secondary);
 }
 
+.nav-link i {
+    margin-right: 0.5rem;
+}
+
+/* Cards modernos e limpos */
 .card {
-    background: rgba(15, 20, 25, 0.9);
-    border: 2px solid var(--valorant-red);
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(255, 70, 85, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.btn-primary {
-    background: linear-gradient(45deg, var(--valorant-red), #ff6b6b);
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: transform 0.2s ease;
-}
-
-.btn-primary:hover {
-    transform: scale(1.02);
-}
-
-.btn-success {
-    background: linear-gradient(45deg, #28a745, #20c997);
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: transform 0.2s ease;
-}
-
-.btn-success:hover {
-    transform: scale(1.02);
-}
-
-.form-control {
-    background: rgba(236, 232, 225, 0.1);
-    border: 2px solid var(--valorant-red);
-    border-radius: 10px;
-    color: var(--valorant-light);
-}
-
-.form-control:focus {
-    background: rgba(236, 232, 225, 0.15);
-    border-color: var(--valorant-gold);
-    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
-    color: var(--valorant-light);
-}
-
-.table {
-    background: rgba(15, 20, 25, 0.8);
-    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.2s ease;
     overflow: hidden;
 }
 
-.table thead th {
-    background: var(--valorant-red);
-    color: white;
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Botões modernos */
+.btn {
+    border-radius: 0.75rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
     border: none;
-    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color), #34d399);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #059669, var(--success-color));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning-color), #fbbf24);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #d97706, var(--warning-color));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-color), #f87171);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626, var(--danger-color));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+/* Formulários modernos */
+.form-control {
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 0.875rem 1rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.form-control:focus {
+    background: var(--bg-primary);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-light);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Tabelas modernas */
+.table {
+    background: var(--bg-card);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.table thead th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: none;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table tbody td {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    vertical-align: middle;
 }
 
 .table tbody tr {
-    background: rgba(236, 232, 225, 0.05);
     transition: background-color 0.2s ease;
 }
 
 .table tbody tr:hover {
-    background: rgba(255, 70, 85, 0.1);
+    background: var(--bg-secondary);
 }
 
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Lista de itens */
 .list-group-item {
-    background: rgba(15, 20, 25, 0.8);
-    border: 1px solid var(--valorant-red);
-    color: var(--valorant-light);
-    margin-bottom: 5px;
-    border-radius: 10px;
-    transition: background-color 0.2s ease;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 1rem 1.5rem;
+    transition: all 0.2s ease;
 }
 
 .list-group-item:hover {
-    background: rgba(255, 70, 85, 0.1);
+    background: var(--bg-secondary);
+    transform: translateX(4px);
+}
+
+/* Títulos e textos */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .display-4 {
-    color: var(--valorant-red);
-    font-weight: bold;
+    color: var(--text-primary);
+    font-weight: 800;
+    font-size: 2.5rem;
 }
 
 .lead {
-    color: var(--valorant-dark);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
 }
 
+/* Separadores */
 hr {
-    border-color: var(--valorant-red);
-    opacity: 0.5;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 2rem 0;
 }
 
-.agent-indicator {
-    width: 8px;
-    height: 8px;
-    background: var(--valorant-red);
-    border-radius: 50%;
-    margin-right: 12px;
-    flex-shrink: 0;
+/* Detalhes/Summary moderno */
+details {
+    margin-bottom: 2rem;
 }
 
- 
+details summary {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    list-style: none;
+    box-shadow: var(--shadow-sm);
+}
+
+details summary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary::before {
+    content: '+';
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+details[open] summary::before {
+    content: '−';
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+}
+
+/* Espaçamentos personalizados */
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 2rem !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        padding: 0.75rem 1rem;
+    }
+    
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Animações suaves */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Estados de loading */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Melhorias para acessibilidade */
+.btn:focus,
+.form-control:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Utilitários */
+.text-muted {
+    color: var(--text-light) !important;
+}
+
+.bg-light {
+    background-color: var(--bg-secondary) !important;
+}
+
+.border {
+    border: 1px solid var(--border-color) !important;
+}
+
+.rounded {
+    border-radius: 0.75rem !important;
+}
+
+.shadow {
+    box-shadow: var(--shadow-md) !important;
+}
