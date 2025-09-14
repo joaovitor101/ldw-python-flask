@@ -16,8 +16,9 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-8">
+<!-- Seção do Agente -->
+<div class="row mb-4">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -50,42 +51,45 @@
             </div>
         </div>
     </div>
-    
-    <div class="col-lg-4">
+</div>
+
+<!-- Seção das Habilidades -->
+<div class="row mb-5">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0">
                     <i class="fas fa-magic me-2"></i>Habilidades
                 </h5>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 {% if gameInfo.abilities %}
-                <div class="list-group list-group-flush">
+                <div class="row g-0">
                     {% for ability in gameInfo.abilities %}
-                    <div class="list-group-item px-0">
-                        <div class="d-flex align-items-start">
-                            {% if ability.displayIcon %}
-                            <img src="{{ability.displayIcon}}" 
-                                 alt="{{ability.displayName}}" 
-                                 class="me-3 rounded" 
-                                 style="width: 40px; height: 40px;">
-                            {% else %}
-                            <div class="bg-light rounded me-3 d-flex align-items-center justify-content-center" 
-                                 style="width: 40px; height: 40px;">
-                                <i class="fas fa-star text-muted"></i>
+                    <div class="col-md-6 col-lg-3 d-flex">
+                        <div class="p-3 border-end border-bottom d-flex flex-column" style="background-color: #ffffff; min-height: 300px;">
+                            <div class="text-center mb-3">
+                                {% if ability.displayIcon %}
+                                <img src="{{ability.displayIcon}}" 
+                                     alt="{{ability.displayName}}" 
+                                     class="rounded shadow-sm" 
+                                     style="width: 64px; height: 64px; object-fit: contain; background-color: #586e84; padding: 8px;">
+                                {% else %}
+                                <div class="bg-light rounded d-flex align-items-center justify-content-center mx-auto" 
+                                     style="width: 64px; height: 64px;">
+                                    <i class="fas fa-star text-muted"></i>
+                                </div>
+                                {% endif %}
                             </div>
-                            {% endif %}
-                            <div class="flex-grow-1">
-                                <h6 class="mb-1">{{ability.displayName}}</h6>
-                                <p class="text-muted small mb-0">{{ability.description}}</p>
-                            </div>
+                            <h6 class="mb-2 fw-bold text-center text-dark">{{ability.displayName}}</h6>
+                            <p class="text-muted small mb-0 text-center flex-grow-1">{{ability.description}}</p>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
                 {% else %}
-                <div class="text-center py-3">
-                    <i class="fas fa-exclamation-circle fa-2x text-muted mb-2"></i>
+                <div class="text-center py-5">
+                    <i class="fas fa-exclamation-circle fa-3x text-muted mb-3"></i>
                     <p class="text-muted mb-0">Nenhuma habilidade disponível</p>
                 </div>
                 {% endif %}
