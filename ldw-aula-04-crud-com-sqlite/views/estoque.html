@@ -42,6 +42,7 @@
     </div>
 </details>
 <hr>
+
 <table class="table table-bordered">
     <thead class="table-dark">
         <tr>
@@ -56,7 +57,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for game in gameEstoque %}
+        {% for game in gamesEstoque.items %}
         <tr>
             <td>{{game.title}}</td>
             <td>{{game.year}}</td>
@@ -67,7 +68,19 @@
             <td><a href="{{url_for('edit', id=game.id)}}" class="btn btn-warning btn-sm">Editar</a></td>
             <td><a href="{{url_for('delete_estoque', id=game.id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este jogo?')">Excluir</a></td>
         </tr>
+
         {% endfor %}
     </tbody>
 </table>
+<p>
+    <!-- se houver registros anteriores-->
+     {% if gamesEstoque.has_prev %}
+     <a href="{{url_for('estoque', page = gamesEstoque.prev_num)}}"><- anterior </a>
+     {% endif %}
+
+     <!-- Se houver proximos registros  -->
+     {% if gamesEstoque.has_next %}
+     <a href="{{url_for('estoque', page = gamesEstoque.next_num)}}">proximo -></a>
+     {% endif %}
+</p>
 {% endblock content %}
