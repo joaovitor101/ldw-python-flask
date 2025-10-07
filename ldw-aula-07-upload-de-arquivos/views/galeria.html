@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- coletando e exibindo as flash messaages -->
+{% with messages = get_flashed_messages(with_categories = true) %}
+{% for category, message in messages %}
+<div class="alert alert-{{category}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endwith  %}
+
+<h2 style="text-align: center;">Galeria de imagens</h2>
+<div class="row">
+    {% for image in images %}
+        <div class="col-md-3">
+            <img src="/static/uploads/{{image.filename}}" class="img-thumbnail" alt="miniatura da imagem">
+        </div>
+    {% endfor %}
+</div>
+<hr>
+<div class="container col-6">
+    <div class="card mt-4">
+        <div class="card-body">
+            <form action="{{url_for('galeria')}}" method="POST" enctype="multipart/form-data">
+                <label for="imagem">Envie uma imagem:</label>
+                <input type="file" name="file" class="form-control" required>
+                <button type="submit" class="btn btn-danger btn-block">Enviar</button>
+            </form>
+        </div>
+</div>
+
+{% endblock content %}
